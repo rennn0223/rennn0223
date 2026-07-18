@@ -1,0 +1,118 @@
+<svg width="850" height="240" viewBox="0 0 850 240" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hi, I'm 林書任 (rennn0223)">
+  <style>
+    .name {
+      font: 800 44px 'Segoe UI', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+      fill: url(#nameGradient);
+    }
+    .typed {
+      font: 500 19px 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      fill: #9ece6a;
+    }
+    .prompt {
+      font: 700 19px 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      fill: #7aa2f7;
+    }
+    .sub {
+      font: 400 15px 'Segoe UI', 'Noto Sans TC', sans-serif;
+      fill: #8b949e;
+    }
+    .wave {
+      transform-origin: 375px 78px;
+      animation: wave 2.2s ease-in-out infinite;
+    }
+    @keyframes wave {
+      0%, 55%, 100% { transform: rotate(0deg); }
+      10% { transform: rotate(16deg); }
+      20% { transform: rotate(-8deg); }
+      30% { transform: rotate(16deg); }
+      40% { transform: rotate(-4deg); }
+      50% { transform: rotate(10deg); }
+    }
+    .star { animation: twinkle 3s ease-in-out infinite; }
+    .star.d1 { animation-delay: .6s; }
+    .star.d2 { animation-delay: 1.3s; }
+    .star.d3 { animation-delay: 2.1s; }
+    @keyframes twinkle {
+      0%, 100% { opacity: .15; }
+      50% { opacity: .9; }
+    }
+    .cursor { animation: blink 1s steps(2, start) infinite; }
+    @keyframes blink { to { opacity: 0; } }
+  </style>
+
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="850" y2="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#161b2e"/>
+    </linearGradient>
+    <linearGradient id="nameGradient" x1="60" y1="60" x2="620" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7aa2f7">
+        <animate attributeName="stop-color" values="#7aa2f7;#bb9af7;#7dcfff;#7aa2f7" dur="6s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="0.5" stop-color="#bb9af7">
+        <animate attributeName="stop-color" values="#bb9af7;#7dcfff;#7aa2f7;#bb9af7" dur="6s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="1" stop-color="#7dcfff">
+        <animate attributeName="stop-color" values="#7dcfff;#7aa2f7;#bb9af7;#7dcfff" dur="6s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7aa2f7" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#7aa2f7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#bb9af7" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#bb9af7" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cardClip">
+      <rect width="850" height="240" rx="14"/>
+    </clipPath>
+    <clipPath id="typeClip">
+      <rect x="88" y="128" height="30" width="0">
+        <animate attributeName="width" dur="9s" repeatCount="indefinite" calcMode="discrete"
+          values="0.0;11.8;23.6;35.4;47.2;59.0;70.8;82.6;94.4;106.2;118.0;129.8;141.6;153.4;165.2;177.0;188.8;200.6;212.4;224.2;236.0;247.8;259.6;271.4;283.2;295.0;306.8;318.6;330.4;342.2;354.0;365.8;377.6;389.4;401.2;401.2;267.5;133.7;0;0"
+          keyTimes="0.0;0.0132;0.0265;0.0397;0.0529;0.0662;0.0794;0.0926;0.1059;0.1191;0.1324;0.1456;0.1588;0.1721;0.1853;0.1985;0.2118;0.225;0.2382;0.2515;0.2647;0.2779;0.2912;0.3044;0.3176;0.3309;0.3441;0.3574;0.3706;0.3838;0.3971;0.4103;0.4235;0.4368;0.45;0.82;0.9;0.93;0.96;1.0"/>
+      </rect>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#cardClip)">
+    <rect width="850" height="240" fill="url(#bgGradient)"/>
+
+    <!-- drifting glow blobs -->
+    <circle cx="700" cy="40" r="180" fill="url(#glowA)">
+      <animateTransform attributeName="transform" type="translate" values="0 0; -60 40; 0 0" dur="12s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="120" cy="220" r="160" fill="url(#glowB)">
+      <animateTransform attributeName="transform" type="translate" values="0 0; 50 -30; 0 0" dur="10s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- twinkling stars -->
+    <circle class="star" cx="770" cy="60" r="2.2" fill="#e0e6ff"/>
+    <circle class="star d1" cx="710" cy="150" r="1.8" fill="#e0e6ff"/>
+    <circle class="star d2" cx="805" cy="120" r="1.5" fill="#e0e6ff"/>
+    <circle class="star d3" cx="640" cy="195" r="2" fill="#e0e6ff"/>
+    <circle class="star d2" cx="60" cy="50" r="1.6" fill="#e0e6ff"/>
+    <circle class="star d1" cx="30" cy="120" r="2" fill="#e0e6ff"/>
+
+    <!-- name -->
+    <text x="60" y="92" class="name">Hi, I'm 林書任</text>
+    <text x="352" y="92" font-size="40" class="wave">👋</text>
+
+    <!-- terminal-style typing line -->
+    <text x="60" y="150" class="prompt">$</text>
+    <g clip-path="url(#typeClip)">
+      <text x="88" y="150" class="typed">git commit -m "always be building"</text>
+    </g>
+    <rect class="cursor" x="90" y="132" width="9" height="22" fill="#9ece6a" opacity="0.9">
+      <animate attributeName="x" dur="9s" repeatCount="indefinite" calcMode="discrete"
+        values="90.0;101.8;113.6;125.4;137.2;149.0;160.8;172.6;184.4;196.2;208.0;219.8;231.6;243.4;255.2;267.0;278.8;290.6;302.4;314.2;326.0;337.8;349.6;361.4;373.2;385.0;396.8;408.6;420.4;432.2;444.0;455.8;467.6;479.4;491.2;491.2;357.5;223.7;90;90"
+        keyTimes="0.0;0.0132;0.0265;0.0397;0.0529;0.0662;0.0794;0.0926;0.1059;0.1191;0.1324;0.1456;0.1588;0.1721;0.1853;0.1985;0.2118;0.225;0.2382;0.2515;0.2647;0.2779;0.2912;0.3044;0.3176;0.3309;0.3441;0.3574;0.3706;0.3838;0.3971;0.4103;0.4235;0.4368;0.45;0.82;0.9;0.93;0.96;1.0"/>
+    </rect>
+
+    <!-- footer line -->
+    <text x="60" y="200" class="sub">@rennn0223 · 持續學習中 · building things one commit at a time</text>
+
+    <rect x="0.5" y="0.5" width="849" height="239" rx="14" stroke="#30363d"/>
+  </g>
+</svg>
