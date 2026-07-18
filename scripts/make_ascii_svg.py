@@ -99,6 +99,10 @@ def main() -> None:
             continue
         y_text = PAD + i * CHAR_H + CHAR_H - 2
         text = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        # non-breaking spaces: some renderers (notably Safari) strip leading
+        # regular spaces from <text> even with xml:space="preserve", which
+        # shifts and stretches every row
+        text = text.replace(" ", "&#160;")
         parts.append(
             f'<g clip-path="url(#r{i})">'
             f'<text x="{PAD}" y="{y_text}" textLength="{len(line) * CHAR_W}">{text}</text>'
