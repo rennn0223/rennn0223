@@ -1,46 +1,69 @@
 #!/usr/bin/env python3
-"""Convert source-prepped.png into a self-typing monochrome ASCII SVG.
+"""Convert source-photo.jpg into a self-typing ASCII-portrait SVG.
 
-Each pixel of a ~100-wide character grid picks a glyph from a density
-ramp; every row wipes in left-to-right with a block cursor riding the
-edge, staggered top to bottom. Prints once and freezes — no looping.
+Pipeline: crop → CLAHE local contrast → median denoise → tone posterize
+(6 levels) + Sobel edge lines, then map onto a short glyph ramp. Dark
+glyphs print on a light paper card so the portrait reads like ink —
+hair dark, face light. Every row wipes in left-to-right with a block
+cursor riding the edge, staggered top to bottom. Plays once, freezes.
 
 Usage: python scripts/make_ascii_svg.py
 Writes: ren-ascii.svg at the repo root.
 """
 from pathlib import Path
 
+import cv2
 import numpy as np
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "source-prepped.png"
+SRC = ROOT / "source-photo.jpg"
 OUT = ROOT / "ren-ascii.svg"
 
-RAMP = " .`:-=+*cs#%@"  # bright (sparse) -> dark (dense)
+GLYPHS = " .:=*#"       # tone levels, sparse -> dense (ink on paper)
+CROP = (0.08, 0.02, 0.92, 0.86)  # trim edges and the busy collar area
+COLS = 110
+CLAHE_CLIP = 3.0
+MEDIAN = 5
+EDGE_AMT = 0.65          # how strongly feature lines darken the tone
+THRESHOLDS = [0.15, 0.34, 0.54, 0.74, 0.88]
 
-COLS = 100
-CHAR_W, CHAR_H = 6.0, 10.0  # 10px monospace cell
+CHAR_W, CHAR_H = 6.0, 10.0
 PAD = 18
-FG = "#c9d1d9"  # one light-gray fill: monochrome on purpose
-BG = "#0d1117"
-BORDER = "#30363d"
+FG = "#1f2328"           # ink
+BG = "#f6f8fa"           # paper
+BORDER = "#d0d7de"
 
-ROW_DUR = 0.35   # seconds for one row's wipe
-STAGGER = 0.055  # delay between rows
+ROW_DUR = 0.35
+STAGGER = 0.05
 
 
-def image_to_grid(path: Path) -> list[str]:
-    img = Image.open(path).convert("L")
-    rows = round(COLS * (img.height / img.width) * (CHAR_W / CHAR_H))
-    img = img.resize((COLS, rows), Image.LANCZOS)
-    px = np.asarray(img, dtype=np.float32) / 255.0
-    idx = ((1.0 - px) * (len(RAMP) - 1)).round().astype(int)
-    return ["".join(RAMP[i] for i in row).rstrip() for row in idx]
+def image_to_grid() -> list[str]:
+    img = Image.open(SRC).convert("L")
+    w, h = img.size
+    l, t, r, b = CROP
+    a = np.asarray(img.crop((int(w * l), int(h * t), int(w * r), int(h * b))))
+
+    x = cv2.createCLAHE(clipLimit=CLAHE_CLIP, tileGridSize=(8, 8)).apply(a)
+    x = cv2.medianBlur(x, MEDIAN)
+    gx = cv2.Sobel(x, cv2.CV_32F, 1, 0, ksize=3)
+    gy = cv2.Sobel(x, cv2.CV_32F, 0, 1, ksize=3)
+    mag = np.sqrt(gx * gx + gy * gy)
+    mag /= max(np.percentile(mag, 99), 1e-6)
+
+    rows = round(COLS * (a.shape[0] / a.shape[1]) * (CHAR_W / CHAR_H))
+    v = cv2.resize(x, (COLS, rows), interpolation=cv2.INTER_AREA).astype(np.float32) / 255
+    e = np.clip(cv2.resize(mag, (COLS, rows), interpolation=cv2.INTER_AREA), 0, 1)
+    ink = np.clip((1 - v) + EDGE_AMT * e, 0, 1)
+
+    idx = np.zeros_like(ink, dtype=int)
+    for t in THRESHOLDS:
+        idx += (ink >= t).astype(int)
+    return ["".join(GLYPHS[i] for i in row).rstrip() for row in idx]
 
 
 def main() -> None:
-    grid = image_to_grid(SRC)
+    grid = image_to_grid()
     rows = len(grid)
     width = round(COLS * CHAR_W + 2 * PAD)
     height = round(rows * CHAR_H + 2 * PAD)
@@ -69,13 +92,13 @@ def main() -> None:
 
     parts.append(
         f'<g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" '
-        f'font-size="{CHAR_H}px" fill="{FG}" xml:space="preserve">'
+        f'font-size="{CHAR_H + 1}px" font-weight="600" fill="{FG}" xml:space="preserve">'
     )
     for i, line in enumerate(grid):
         if not line:
             continue
         y_text = PAD + i * CHAR_H + CHAR_H - 2
-        text = (line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+        text = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
         parts.append(
             f'<g clip-path="url(#r{i})">'
             f'<text x="{PAD}" y="{y_text}" textLength="{len(line) * CHAR_W}">{text}</text>'
@@ -92,7 +115,7 @@ def main() -> None:
         end = begin + ROW_DUR
         parts.append(
             f'<rect x="{PAD}" y="{y}" width="{CHAR_W}" height="{CHAR_H}" fill="{FG}" opacity="0">'
-            f'<set attributeName="opacity" to="0.85" begin="{begin:.3f}s"/>'
+            f'<set attributeName="opacity" to="0.7" begin="{begin:.3f}s"/>'
             f'<animate attributeName="x" from="{PAD}" to="{PAD + full_w}" '
             f'dur="{ROW_DUR}s" begin="{begin:.3f}s" fill="freeze"/>'
             f'<set attributeName="opacity" to="0" begin="{end:.3f}s"/></rect>'
