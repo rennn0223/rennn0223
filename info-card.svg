@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="490" height="388" viewBox="0 0 490 388" role="img" aria-label="ren@github info card">
+<style>text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:15px}.ln{opacity:0;animation:in .45s ease-out forwards}@keyframes in{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}</style>
+<rect width="490" height="388" rx="12" fill="#0d1117"/>
+<rect x="0.5" y="0.5" width="489" height="387" rx="12" fill="none" stroke="#30363d"/>
+<line x1="0" y1="44" x2="490" y2="44" stroke="#30363d"/>
+<circle cx="24" cy="22" r="6.5" fill="#ff5f57"/>
+<circle cx="46" cy="22" r="6.5" fill="#febc2e"/>
+<circle cx="68" cy="22" r="6.5" fill="#28c840"/>
+<text x="245.0" y="27" text-anchor="middle" fill="#8b949e">ren@github</text>
+<g class="ln" style="animation-delay:0.00s"><text x="28" y="70" fill="#c9d1d9"><tspan fill="#7ee787">ren@github</tspan></text><text x="28" y="88" fill="#8b949e">----------</text></g>
+<g class="ln" style="animation-delay:0.18s"><text x="28" y="122"><tspan fill="#7ee787">Name</tspan><tspan fill="#8b949e" x="120">:</tspan><tspan fill="#c9d1d9" x="136">林書任 (Ren)</tspan></text></g>
+<g class="ln" style="animation-delay:0.36s"><text x="28" y="152"><tspan fill="#7ee787">GitHub</tspan><tspan fill="#8b949e" x="120">:</tspan><tspan fill="#c9d1d9" x="136">@rennn0223 · joined 2023</tspan></text></g>
+<g class="ln" style="animation-delay:0.54s"><text x="28" y="182"><tspan fill="#7ee787">Focus</tspan><tspan fill="#8b949e" x="120">:</tspan><tspan fill="#c9d1d9" x="136">always be building</tspan></text></g>
+<g class="ln" style="animation-delay:0.72s"><text x="28" y="212"><tspan fill="#7ee787">Stack</tspan><tspan fill="#8b949e" x="120">:</tspan><tspan fill="#c9d1d9" x="136">Python · JavaScript · Web</tspan></text></g>
+<g class="ln" style="animation-delay:0.90s"><text x="28" y="242"><tspan fill="#7ee787">Learning</tspan><tspan fill="#8b949e" x="120">:</tspan><tspan fill="#c9d1d9" x="136">one commit at a time</tspan></text></g>
+<g class="ln" style="animation-delay:1.08s"><text x="28" y="272"><tspan fill="#7ee787">Contact</tspan><tspan fill="#8b949e" x="120">:</tspan><tspan fill="#c9d1d9" x="136">ren910223@gmail.com</tspan></text></g>
+<g class="ln" style="animation-delay:1.26s"><text x="28" y="302"><tspan fill="#7ee787">Motto</tspan><tspan fill="#8b949e" x="120">:</tspan><tspan fill="#c9d1d9" x="136">一次一個 commit,慢慢變強</tspan></text></g>
+<g class="ln" style="animation-delay:1.44s"><rect x="28" y="318" width="26" height="14" fill="#ff7b72"/><rect x="54" y="318" width="26" height="14" fill="#ffa657"/><rect x="80" y="318" width="26" height="14" fill="#d2a8ff"/><rect x="106" y="318" width="26" height="14" fill="#79c0ff"/><rect x="132" y="318" width="26" height="14" fill="#7ee787"/><rect x="158" y="318" width="26" height="14" fill="#f2cc60"/><rect x="184" y="318" width="26" height="14" fill="#c9d1d9"/><rect x="210" y="318" width="26" height="14" fill="#484f58"/></g>
+</svg>
