@@ -1,14 +1,14 @@
 {
  "username": "rennn0223",
- "fetched": "2026-09-10",
- "total": 830,
+ "fetched": "2026-09-11",
+ "total": 836,
  "best_day": {
   "date": "2026-04-24",
   "level": 4,
   "count": 64
  },
- "current_streak": 63,
- "longest_streak": 63,
+ "current_streak": 64,
+ "longest_streak": 64,
  "monthly": {
   "2025-09": 0,
   "2025-10": 0,
@@ -22,7 +22,7 @@
   "2026-06": 67,
   "2026-07": 465,
   "2026-08": 76,
-  "2026-09": 39
+  "2026-09": 45
  },
  "days": [
   {
@@ -1867,6 +1867,11 @@
   },
   {
    "date": "2026-09-10",
+   "level": 1,
+   "count": 6
+  },
+  {
+   "date": "2026-09-11",
    "level": 1,
    "count": 5
   }
